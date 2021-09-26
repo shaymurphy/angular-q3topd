@@ -1,3 +1,62 @@
-<p>
-latest-covid-results works!
-</p>
+<h4 style="padding-left: 20px;">Latest Covid19 Results by country</h4>
+
+<table
+  mat-table
+  [dataSource]="dataSource"
+  matSort
+  matSortActive="infected"
+  matSortDisableClear
+  matSortDirection="desc"
+  class="mat-elevation-z8"
+>
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.country | uppercase }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="infected">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Infected</th>
+    <td mat-cell *matCellDef="let element">{{ element.infected | number }}</td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="tested">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tested</th>
+    <td mat-cell *matCellDef="let element">{{ element.tested }}</td>
+    <ng-container *matCellDef="let element">
+      <td mat-cell *ngIf="!isNumeric(element.tested)">{{ element.tested }}</td>
+      <td mat-cell *ngIf="isNumeric(element.tested)">
+        {{ element.tested | number }}
+      </td>
+    </ng-container>
+  </ng-container>
+
+  <ng-container matColumnDef="deceased">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Deceased</th>
+    <ng-container *matCellDef="let element">
+      <td mat-cell *ngIf="!isNumeric(element.deceased)">
+        {{ element.deceased }}
+      </td>
+      <td mat-cell *ngIf="isNumeric(element.deceased)">
+        {{ element.deceased | number }}
+      </td>
+    </ng-container>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="recovered">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Recovered</th>
+    <ng-container *matCellDef="let element">
+      <td mat-cell *ngIf="!isNumeric(element.recovered)">
+        {{ element.recovered }}
+      </td>
+      <td mat-cell *ngIf="isNumeric(element.recovered)">
+        {{ element.recovered | number }}
+      </td>
+    </ng-container>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
