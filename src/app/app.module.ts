@@ -7,7 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { LatestCovidResultsComponent } from './latest-covid-results/latest-covid-results.component';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,],
   declarations: [AppComponent, LatestCovidResultsComponent],
   bootstrap: [AppComponent],
 })
